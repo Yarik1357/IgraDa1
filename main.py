@@ -14,6 +14,11 @@ window1 = QWidget()
 window1.resize(600, 500)
 window1.setWindowTitle("Authorize 0.1")
 
+name_lb = QLabel("")
+line2 = QVBoxLayout()
+line2.addWidget(name_lb)
+window1.setLayout(line2)
+
 login_btn = QPushButton("Login")
 login_lb = QLabel("Enter your login")
 passw_lb = QLabel("Enter password")
@@ -31,10 +36,6 @@ main_line1.addWidget(login_btn, alignment=Qt.AlignCenter)
 main_line1.addStretch(1)
 window.setLayout(main_line1)
 
-main_line2 = QHBoxLayout()
-main_line2.addStretch(1)
-
-window1.setLayout(main_line2)
 
 window.show()
 
@@ -45,7 +46,7 @@ def login():
     if data:
         if passw_input == data[0][1]:
             print(data)
-
+            name_lb.setText(data[0][2])
             window.hide()
             window1.show()
         else:
