@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import (QApplication, QWidget, QLabel,
-                             QPushButton, QLineEdit, QVBoxLayout)
+                             QPushButton, QLineEdit, QVBoxLayout, QHBoxLayout)
 from PyQt5.QtCore import Qt 
+from baza import *
+
 
 app = QApplication([])
 
@@ -29,12 +31,27 @@ main_line1.addWidget(login_btn, alignment=Qt.AlignCenter)
 main_line1.addStretch(1)
 window.setLayout(main_line1)
 
+main_line2 = QHBoxLayout()
+main_line2.addStretch(1)
+
+window1.setLayout(main_line2)
+
 window.show()
 
 def login():
-    window.hide()
-    window1.show()
+    login_input = login_line.text()
+    passw_input = passw_line.text()
+    data = get_data(login_input)
+    if data:
+        if passw_input == data[0][1]:
+            print(data)
 
+            window.hide()
+            window1.show()
+        else:
+            print("Wrong password")
+    else:
+        print("No such login found")
 login_btn.clicked.connect(login)
 
 app.exec()
